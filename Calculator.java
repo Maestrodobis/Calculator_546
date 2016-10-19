@@ -1,5 +1,110 @@
-public class Calculator 
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Calculator extends  JFrame implements ActionListener
 {
+	public JPanel[] row = new JPanel[5];
+	public JButton[] button = new JButton[19];
+	public String[] buttonString = {"7", "8", "9", "+",
+							 "4", "5", "6", "-",
+							 "1", "2", "3", "*",
+							 ".", "/", "C", "√",
+							 "+/-", "=", "0"};
+	public int[] dimW = {300,45,100,90};
+	public int[] dimH = {35, 40};
+	public Dimension displayDimension = new Dimension(dimW[0], dimH[0]);
+	public Dimension regularDimension = new Dimension(dimW[1], dimH[1]);
+	public Dimension rColumnDimension = new Dimension(dimW[2], dimH[1]);
+	public Dimension zeroButDimension = new Dimension(dimW[3], dimH[1]);
+	public boolean[] function = new boolean[4];
+	public double[] temporary = {0, 0};
+	public JTextArea display = new JTextArea(1,20);
+	public Font font = new Font("Times new Roman", Font.BOLD, 14);
+
+	Calculator()
+	{
+		super("Title");
+		setDesign();
+		setSize(380, 250);
+		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		GridLayout grid = new GridLayout(5,5);
+		setLayout(grid);
+		for(int i = 0; i < 4; i++)
+			function[i] = false;
+		FlowLayout f1 = new FlowLayout(FlowLayout.CENTER);
+		FlowLayout f2 = new FlowLayout(FlowLayout.CENTER,1,1);
+		
+		for(int i = 0; i < 5; i++)
+			row[i] = new JPanel();
+		
+		row[0].setLayout(f1);
+		
+		for(int i = 1; i < 5; i++)
+			row[i].setLayout(f2);
+		
+		for(int i = 0; i < 19; i++) 
+		{
+			button[i] = new JButton();
+			button[i].setText(buttonString[i]);
+			button[i].setFont(font);
+			button[i].addActionListener(this);
+		}
+		
+		display.setFont(font);
+		display.setEditable(false);
+		display.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		display.setPreferredSize(displayDimension);
+		
+		for(int i = 0; i < 14; i++)
+			button[i].setPreferredSize(regularDimension);
+		
+		for(int i = 14; i < 18; i++)
+			button[i].setPreferredSize(rColumnDimension);
+		
+		button[18].setPreferredSize(zeroButDimension);
+		row[0].add(display);
+		add(row[0]);
+		
+		for(int i = 0; i < 4; i++)
+			row[1].add(button[i]);
+		
+		row[1].add(button[14]);
+		add(row[1]);
+		
+		for(int i = 4; i < 8; i++)
+			row[2].add(button[i]);
+		
+		row[2].add(button[15]);
+		add(row[2]);
+		         
+		for(int i = 8; i < 12; i++)
+			row[3].add(button[i]);
+		
+		row[3].add(button[16]);
+		add(row[3]);
+		row[4].add(button[18]);
+		
+		for(int i = 12; i < 14; i++)
+			row[4].add(button[i]);
+		row[4].add(button[17]);
+		add(row[4]);
+		setVisible(true);
+	}
+	
+	public final void setDesign() 
+	{
+		try {
+			UIManager.setLookAndFeel(
+					"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		}catch(Exception e) {}
+	}
+	
+	public void actionPerformed(ActionEvent ae) {
+		// TODO Auto-generated method stub
+		
+	}
 	public double add(double a, double b) 
 	{
 	    return a+b;          
@@ -23,6 +128,8 @@ public class Calculator
 	public static void main(String args[])
 	{
 		Calculator calc = new Calculator();
+		
+		/*
 		double number1 = 0;
 		double number2 = 0;
 		
@@ -59,5 +166,8 @@ public class Calculator
 			System.out.println("USAGE: ./calculator.java <double> <double>");
 			System.exit(0);
 		}
+		*/
 	}
+
+	
 }
