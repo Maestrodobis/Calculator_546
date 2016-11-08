@@ -101,9 +101,62 @@ public class Calculator extends  JFrame implements ActionListener
 		}catch(Exception e) {}
 	}
 	
-	public void actionPerformed(ActionEvent ae) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent ae) 
+	{
+		if(ae.getSource() == button[0])
+			display.append("7");
+		if(ae.getSource() == button[1])
+			display.append("8");
+		if(ae.getSource() == button[2])
+			display.append("9");
+		if(ae.getSource() == button[3])
+		{
+			temporary[0] = Double.parseDouble(display.getText());
+			function[0] = true;
+			display.setText("");
+		}
+		if(ae.getSource() == button[4])
+			display.append("4");
+		if(ae.getSource() == button[5])
+			display.append("5");
+		if(ae.getSource() == button[6])
+			display.append("6");
+		if(ae.getSource() == button[7])
+		{
+			temporary[0] = Double.parseDouble(display.getText());
+			function[1] = true;
+			display.setText("");
+		}
+		if(ae.getSource() == button[8])
+			display.append("1");
+	    if(ae.getSource() == button[9])
+	        display.append("2");
+	    if(ae.getSource() == button[10])
+	        display.append("3");
+	    if(ae.getSource() == button[11]) {
+	        //multiply function[2]
+	        temporary[0] = Double.parseDouble(display.getText());
+	        function[2] = true;
+	        display.setText("");
+	    }
+	    if(ae.getSource() == button[12])
+	        display.append(".");
+	    if(ae.getSource() == button[13]) {
+	        //divide function[3]
+	        temporary[0] = Double.parseDouble(display.getText());
+	        function[3] = true;
+	        display.setText("");
+	    }
+	    if(ae.getSource() == button[14])
+	        clear();
+	    if(ae.getSource() == button[15])
+	        //todo
+	    if(ae.getSource() == button[16])
+	       //todo
+	    if(ae.getSource() == button[17])
+	        //todo
+	    if(ae.getSource() == button[18])
+	        display.append("0");
 	}
 	public double add(double a, double b) 
 	{
@@ -124,7 +177,20 @@ public class Calculator extends  JFrame implements ActionListener
 	{
 	    return a/b;          
 	}
-
+	public void clear() 
+	{
+		try{
+			display.setText(""); //Sets the display to being blank
+			for(int i = 0; i<4; i++)
+				function[i] = false; //sets the functions back to false
+			for(int i = 0; i < 2; i++)
+				temporary[i] = 0; //sets temp vars back to 0
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println(e);
+		}
+	}
 	public static void main(String args[])
 	{
 		Calculator calc = new Calculator();
