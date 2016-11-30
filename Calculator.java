@@ -150,14 +150,87 @@ public class Calculator extends  JFrame implements ActionListener
 	    if(ae.getSource() == button[14])
 	        clear();
 	    if(ae.getSource() == button[15])
-	        //todo
+	        getSqrt();
 	    if(ae.getSource() == button[16])
-	       //todo
+	    	getPosNeg();
 	    if(ae.getSource() == button[17])
-	        //todo
+	        getResult();
 	    if(ae.getSource() == button[18])
 	        display.append("0");
 	}
+	private void getResult() 
+	{
+		double result = 0;
+		temporary[1] = Double.parseDouble(display.getText());
+		
+		String temp0 = Double.toString(temporary[0]);
+		String temp1 = Double.toString(temporary[1]);
+		
+		try{
+			if(temp0.contains("-"))
+			{
+				String[] temp00 = temp0.split("-", 2);
+				temporary[0] = (Double.parseDouble(temp00[1])*-1);
+			}
+			if(temp1.contains("-"))
+			{
+				String[] temp11 = temp1.split("-", 2);
+				temporary[1] = (Double.parseDouble(temp11[1])*-1);
+			}
+		}
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			System.out.println(e);
+		}
+		
+		try{
+			if(function[2] == true)
+				result = temporary[0]*temporary[1];
+			else if(function[3] == true)
+				result = temporary[0]/temporary[1];
+			else if(function[0] == true)
+				result = temporary[0] + temporary[1];
+			else if(function[1] == true)
+				result = temporary[0] - temporary[1];
+			display.setText(Double.toString(result));
+			for(int i = 0; i < 4; i++)
+				function[i] = false;
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println(e);
+		}
+	}
+
+	private void getPosNeg() 
+	{
+		try
+		{
+			double value = Double.parseDouble(display.getText());
+			if(value != 0)
+			{
+				value = value * -1;
+				display.setText(Double.toString(value));
+			}
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println(e);
+		}
+	}
+
+	private void getSqrt() {
+		try 
+		{
+			double value = Math.sqrt(Double.parseDouble(display.getText())); // Create a variable for value, and use Math's square root to find value
+			display.setText(Double.toString(value)); // Sets display to new value
+		} 
+		catch(NumberFormatException e) 
+		{
+			System.out.println(e);
+		}
+	}
+
 	public double add(double a, double b) 
 	{
 	    return a+b;          
@@ -194,45 +267,6 @@ public class Calculator extends  JFrame implements ActionListener
 	public static void main(String args[])
 	{
 		Calculator calc = new Calculator();
-		
-		/*
-		double number1 = 0;
-		double number2 = 0;
-		
-		if(args.length == 3)
-		{	
-			try {
-	            // Parse the string argument into an integer value.
-				number1 = Double.parseDouble(args[2]);
-	        }
-	        catch (NumberFormatException nfe) {
-	            // The second argument isn't a valid double.  Print
-	            // an error message, then exit with an error code.
-	            System.out.println("The first number must be a double.");
-	            System.exit(1);
-	        }
-			try {
-	            // Parse the string argument into an integer value.
-				number2 = Double.parseDouble(args[3]);
-	        }
-	        catch (NumberFormatException nfe) {
-	            // The third argument isn't a valid double.  Print
-	            // an error message, then exit with an error code.
-	            System.out.println("The second number must be a double.");
-	            System.exit(1);
-	        }
-			
-			System.out.println(calc.add(number1, number2));
-			System.out.println(calc.subtract(number1, number2));
-			System.out.println(calc.multiply(number1, number2));
-			System.out.println(calc.divide(number1, number2));
-		}
-		else
-		{
-			System.out.println("USAGE: ./calculator.java <double> <double>");
-			System.exit(0);
-		}
-		*/
 	}
 
 	
